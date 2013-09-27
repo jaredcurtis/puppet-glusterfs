@@ -3,6 +3,8 @@ puppet-glusterfs
 
 GlusterFS type
 
+This is a beta release. Please review and test carefully before using in production.
+
 Usage
 =====
 ```puppet
