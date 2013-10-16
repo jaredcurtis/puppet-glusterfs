@@ -1,4 +1,5 @@
 require 'puppet'
+require 'pp'
 Puppet::Type.type(:glusterfs_pool).provide(:glusterfs) do
 
   commands :glusterfs => 'gluster'
@@ -24,7 +25,11 @@ Puppet::Type.type(:glusterfs_pool).provide(:glusterfs) do
 
   def exists?
     glusterfs('peer', 'status').split(/\n/).detect do |line|
-      line.match(/^Hostname:\s#{Regexp.escape(resource[:name])}$/)
+      if Facter.value(:ipaddress) != resource[:name]
+        line.match(/^Hostname:\s#{Regexp.escape(resource[:name])}$/)
+      else
+        return 1
+      end
     end
   end
 end
