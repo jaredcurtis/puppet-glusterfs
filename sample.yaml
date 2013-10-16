@@ -1,0 +1,4 @@
+---
+# Glusterfs
+glusterfs::package::redhat::baseurl: http://htf-cobbler/repo_mirror/el-6-x86_64-gluster
+glusterfs::package::redhat::gpgkey: https://htf-cobbler/pub/keys/glusterfs.key
