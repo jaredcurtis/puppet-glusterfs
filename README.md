@@ -8,7 +8,8 @@ This is a beta release. Please review and test carefully before using in product
 Usage
 =====
 ```puppet
-node 'storage01' {
+node /storage/ {
+  class { 'glusterfs': }
   glusterfs_pool { ['192.168.1.100', '192.168.1.101']: } ->
   glusterfs_vol { 'data':
     replica => 2,
