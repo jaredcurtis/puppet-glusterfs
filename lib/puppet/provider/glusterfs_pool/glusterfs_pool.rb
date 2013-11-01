@@ -24,11 +24,14 @@ Puppet::Type.type(:glusterfs_pool).provide(:glusterfs) do
   end
 
   def exists?
+    @interfaces = Facter.value(:interfaces).split(',')
+    @addresses = @interfaces.map! { |address| Facter.value("ipaddress_#{address}") } |
+      ['fqdn', 'hostname'].map! { |hosts| Facter.value("#{hosts}") }
     glusterfs('peer', 'status').split(/\n/).detect do |line|
-      if Facter.value(:ipaddress) != resource[:name]
-        line.match(/^Hostname:\s#{Regexp.escape(resource[:name])}$/)
-      else
+      if @addresses.include?(resource[:name])
         return 1
+      else
+        line.match(/^Hostname:\s#{Regexp.escape(resource[:name])}$/)
       end
     end
   end
