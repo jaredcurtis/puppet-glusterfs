@@ -1,5 +1,5 @@
 name    'jcurtis-glusterfs'
-version '0.0.2'
+version '0.0.3'
 source 'git://github.com/jaredcurtis/puppet-glusterfs.git'
 author 'jcurtis'
 license 'Apache License, Version 2.0'
