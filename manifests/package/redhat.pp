@@ -4,7 +4,7 @@
 #
 class glusterfs::package::redhat(
   # Allow for overide of yum repo with hiera
-  $baseurl  = "http://download.gluster.org/pub/gluster/glusterfs/LATEST/EPEL.repo/epel-${::lsbmajdistrelease}/\$basearch/",
+  $baseurl  = "http://download.gluster.org/pub/gluster/glusterfs/LATEST/EPEL.repo/epel-\$releasever/\$basearch/",
   $gpgkey   = 'http://download.gluster.org/pub/gluster/glusterfs/LATEST/EPEL.repo/pub.key',
   $enabled  = '1',
   $priority = '1',
