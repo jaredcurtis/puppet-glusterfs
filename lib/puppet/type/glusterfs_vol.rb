@@ -37,6 +37,11 @@ Puppet::Type.newtype(:glusterfs_vol) do
     newvalues(/\S+:\S+/)
   end
 
+  newparam(:force, :boolean => true) do
+    desc 'Whether to add the "force" flag when creating a volume or adding a brick'
+    defaultto false
+  end
+
   newparam(:delete) do
     desc 'delete brick'
     defaultto :false
