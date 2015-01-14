@@ -75,6 +75,9 @@ Puppet::Type.type(:glusterfs_vol).provide(:glusterfs) do
     end
 
     missing_brick = []
+    unless resource[:brick].kind_of? Array
+      resource[:brick] = [ resource[:brick] ]
+    end
     resource[:brick].map do |brick|
       if not volinfo =~ /Brick\d+:\s#{Regexp.escape(brick)}/ 
         self.debug "#{brick} is missing from the volume"
