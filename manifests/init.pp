@@ -25,7 +25,12 @@
 #
 class glusterfs(
   $upstream = true,
+  $pool = {},
+  $volumes = {}
 ) {
   class { 'glusterfs::package': } ~>
   class { 'glusterfs::service': }
+
+  create_resources(glusterfs_pool, $pool, {"require" => Service['glusterd']})
+  create_resources(glusterfs_vol, $volumes)
 }
