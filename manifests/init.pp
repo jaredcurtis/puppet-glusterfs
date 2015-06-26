@@ -12,6 +12,8 @@
 #   List of volumes to create/start
 # [*data_dir*]
 #   Optional path to be created before volumes are created/started
+# [*server*]
+#   Defaults to true, running the glusterd service if so
 #
 # === Examples
 #
@@ -34,10 +36,15 @@ class glusterfs(
   $upstream = true,
   $pool = {},
   $volumes = {},
-  $data_dir = undef
+  $data_dir = undef,
+  $server = true
 ) {
-  class { 'glusterfs::package': } ~>
-  class { 'glusterfs::service': }
+  class { 'glusterfs::package': }
+  if ($server) {
+    class { 'glusterfs::service':
+      require => Class['glusterfs::package']
+    }
+  }
 
   if ($data_dir) {
     validate_absolute_path($data_dir)
